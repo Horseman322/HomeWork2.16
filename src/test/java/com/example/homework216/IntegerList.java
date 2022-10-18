@@ -1,4 +1,4 @@
-package com.example.homework215;
+package com.example.homework216;
 
 public interface IntegerList {
     // Добавление элемента.

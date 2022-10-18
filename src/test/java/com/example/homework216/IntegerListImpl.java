@@ -1,9 +1,9 @@
-package com.example.homework215;
+package com.example.homework216;
 
 public class IntegerListImpl implements IntegerList {
 
     private static final int INITIAL_SIZE = 15;
-    private final Integer[] data;
+    private Integer[] data;
     private int capacity;
 
     public IntegerListImpl() {
@@ -18,8 +18,11 @@ public class IntegerListImpl implements IntegerList {
         capacity = 0;
     }
 
-
-
+    private void grow(){
+        Integer[] newData = new Integer[(int) (1.5 * data.length)];
+        System.arraycopy(data, 0, newData, 0, capacity);
+        data = newData;
+    }
 
     @Override
     public Integer add(Integer item) {
@@ -29,7 +32,7 @@ public class IntegerListImpl implements IntegerList {
     @Override
     public Integer add(int index, Integer item) {
         if (capacity >= data.length){
-                throw new IllegalArgumentException("Список полон!")
+                grow();
         }
         checkNotNull(item);
         checkNonNegativeIndex(index);
@@ -173,7 +176,7 @@ public class IntegerListImpl implements IntegerList {
     }
 
     private void checkNotNull (Integer item){
-        if (Object.isNull(item)){
+        if (item == null){
             throw new IllegalArgumentException("Нельзя хранить в списке null-ы");
         }
     }
